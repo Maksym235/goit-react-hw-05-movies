@@ -12,15 +12,19 @@ export function MovieReviews() {
   return (
     <div>
       <ul>
-        {reviews.map(item => {
-          const { author, content, id } = item;
-          return (
-            <li key={id}>
-              <h2>{author}</h2>
-              <p>{content}</p>
-            </li>
-          );
-        })}
+        {reviews.length ? (
+          reviews.map(item => {
+            const { author, content, id } = item;
+            return (
+              <li key={id}>
+                <h2>Author: {author}</h2>
+                <p>{content}</p>
+              </li>
+            );
+          })
+        ) : (
+          <div>Sorry movie have not reviews</div>
+        )}
       </ul>
     </div>
   );
