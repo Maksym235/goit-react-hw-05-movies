@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, useRef } from 'react';
 import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { GetMovieDetails } from 'services/GetApi';
 import defaultImg from '../../defaultImg.jpg';
@@ -21,6 +21,7 @@ export default function MovieDetails() {
   const location = useLocation();
 
   const goBack = location.state?.from ?? '/movies';
+  const backLInkRef = useRef(goBack);
 
   const [movie, setMovie] = useState([]);
   const { moviesId } = useParams();
@@ -33,7 +34,7 @@ export default function MovieDetails() {
 
   return (
     <div>
-      <Link to={goBack}>Go back </Link>
+      <Link to={backLInkRef.current}>Go back </Link>
       <h1>{title}</h1>
       {poster_path ? (
         <img
