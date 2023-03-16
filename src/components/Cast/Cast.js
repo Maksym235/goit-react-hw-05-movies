@@ -4,7 +4,7 @@ import { GetMovieCredits } from 'services/GetApi';
 import person from '../../person.png';
 const URL = 'https://image.tmdb.org/t/p/w500';
 
-export function MovieCast() {
+export default function MovieCast() {
   const [cast, setCast] = useState([]);
   const { moviesId } = useParams();
   useEffect(() => {

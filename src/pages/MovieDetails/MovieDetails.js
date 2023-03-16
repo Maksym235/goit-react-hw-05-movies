@@ -1,10 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { GetMovieDetails } from 'services/GetApi';
 import defaultImg from '../../defaultImg.jpg';
+import loading from '../../36292-loader-movie.json';
+import { useLottie } from 'lottie-react';
 const URL = 'https://image.tmdb.org/t/p/w500';
 
-export function MovieDetails() {
+export default function MovieDetails() {
+  const options = {
+    animationData: loading,
+    loop: true,
+    style: {
+      width: '200px',
+      height: '200px,',
+    },
+  };
+
+  const { View } = useLottie(options);
+
   const location = useLocation();
 
   const goBack = location.state?.from ?? '/movies';
@@ -42,7 +55,9 @@ export function MovieDetails() {
           <Link to="reviews">MovieReviews</Link>
         </li>
       </ul>
-      <Outlet />
+      <Suspense fallback={<div>{View}</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 }

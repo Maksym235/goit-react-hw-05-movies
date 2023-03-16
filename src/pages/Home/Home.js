@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import GetTrending from 'services/GetApi';
 
-export function Home() {
+export default function Home() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,9 @@ export function Home() {
         {movies.map(movie => {
           return (
             <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+              <Link to={`/movies/${movie.id}`} state={{ from: '/' }}>
+                {movie.title}
+              </Link>
             </li>
           );
         })}
